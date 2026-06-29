@@ -33,6 +33,7 @@ const Dashboard = () => {
   useEffect(() => {
     fetchTasks();
     fetchStats();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filter, search, sort]);
 
   const refresh = () => {
