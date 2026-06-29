@@ -40,6 +40,15 @@ const Dashboard = () => {
     fetchTasks();
     fetchStats();
   };
+  const deleteCompleted = async () => {
+    try {
+      await api.delete('/tasks/completed/all');
+      toast.success('All completed tasks deleted!');
+      refresh();
+    } catch {
+      toast.error('Error deleting completed tasks');
+    }
+  };
 
   return (
     <div style={styles.page}>
@@ -48,6 +57,9 @@ const Dashboard = () => {
         <StatsBar stats={stats} />
         <TaskForm onTaskAdded={refresh} />
         <div style={styles.filters}>
+          <button style={styles.deleteBtn} onClick={deleteCompleted}>
+          🗑 Delete Completed
+          </button>
           <input style={styles.search} placeholder="🔍 Search tasks..."
             onChange={e => setSearch(e.target.value)} />
           <select style={styles.select} onChange={e => setFilter(e.target.value)}>
@@ -79,7 +91,7 @@ const styles = {
   filters: { display: 'flex', gap: '12px', marginBottom: '24px', flexWrap: 'wrap' },
   search: { flex: 1, padding: '10px', borderRadius: '8px', border: '1px solid #ddd', fontSize: '14px' },
   select: { padding: '10px', borderRadius: '8px', border: '1px solid #ddd', fontSize: '14px' },
-  empty: { textAlign: 'center', color: '#666', fontSize: '16px', marginTop: '40px' }
+  empty: { textAlign: 'center', color: '#666', fontSize: '16px', marginTop: '40px' },deleteBtn: { padding: '10px 16px', background: '#ef4444', color: 'white', border: 'none', borderRadius: '8px', cursor: 'pointer', fontSize: '14px' }
 };
 
 export default Dashboard;

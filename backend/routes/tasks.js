@@ -95,5 +95,12 @@ router.patch('/:id/toggle', auth, async (req, res) => {
     res.status(500).json({ msg: 'Server error' });
   }
 });
-
+router.delete('/completed/all', auth, async (req, res) => {
+  try {
+    await Task.deleteMany({ user: req.user, completed: true });
+    res.json({ msg: 'All completed tasks deleted' });
+  } catch (err) {
+    res.status(500).json({ msg: 'Server error' });
+  }
+});
 module.exports = router;
