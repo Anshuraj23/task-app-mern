@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar';
 import StatsBar from '../components/StatsBar';
 import TaskForm from '../components/TaskForm';
 import TaskCard from '../components/TaskCard';
+import toast from 'react-hot-toast';
 
 const Dashboard = () => {
   const [tasks, setTasks] = useState([]);
